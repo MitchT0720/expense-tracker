@@ -89,7 +89,7 @@ ExpenseTracker/
 ## 📸 Screenshots
 
 ### Dashboard
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/Dashboard.png)
 
 ### Expenses Table
 ![Expenses](screenshots/Expenses_Table.png)
