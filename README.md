@@ -1,32 +1,45 @@
-# Expense Tracker (Python CLI App)
+# Expense Tracker (Python / Flask Web App)
 
 ## 📌 Description
 
-This is a simple command-line expense tracker built with Python.
-It allows users to add expenses, categorize them, and view total spending.
-Data is saved locally using JSON so expenses persist after closing the program.
+A web-based expense tracker built with Python and Flask, evolved from an initial CLI version.
+Users can add, edit, and delete expenses, categorize them, and view a live dashboard with total spending and category breakdown.
+Data is persisted using SQLite via Flask-SQLAlchemy.
 
 ---
 
 ## 🚀 Features
 
-* Add new expenses with category and amount
-* View all saved expenses
-* Calculate total spending
-* Group expenses by category
-* Save and load data using JSON file
+- Add, edit, and delete expenses with confirmation popup
+- Categorize expenses (Food, Transport, Shopping, Entertainment, Bills, Other)
+- Date tracking per expense
+- Dashboard showing total spent and expense count
+- Spending charts — category pie chart and monthly bar chart
+- Input validation with error messages
+- Flash notifications for add, update, and delete actions
+- Export expenses to Excel (.xlsx)
+- Data persistence with SQLite database
 
 ---
 
 ## 🛠 How to Run
 
-1. Clone the repository or download the files
-2. Open the project folder in VS Code
-3. Run:
-
+1. Clone the repository
+2. Create and activate a virtual environment:
 ```bash
-python main.py
+    python -m venv .venv
+    .venv\Scripts\activate        # Windows
+    source .venv/bin/activate     # Mac/Linux
 ```
+3. Install dependencies:
+```bash
+    pip install flask flask-sqlalchemy openpyxl
+```
+4. Run the app:
+```bash
+    python app.py
+```
+5. Open your browser at `http://127.0.0.1:5000`
 
 ---
 
@@ -34,19 +47,55 @@ python main.py
 
 ```
 ExpenseTracker/
-├── main.py
-├── expense_manager.py
-├── file_handler.py
-├── expenses.json
+├── app.py
+├── models.py
+├── seed.py
+├── templates/
+│   ├── index.html
+│   └── edit.html
+├── instance/
+│   └── expenses.db
 └── README.md
 ```
 
 ---
 
+## 🛠 Tech Stack
+- Python
+- Flask
+- Flask-SQLAlchemy
+- SQLite
+- Jinja2
+- Bootstrap 5
+- Chart.js
+- openpyxl
+
+---
+
 ## 📚 What I Learned
 
-* Python functions and modules
-* File handling (JSON read/write)
-* Input validation
-* Data structures (lists and dictionaries)
-* Basic software project structure
+- Building web apps with Flask
+- Database modeling and queries with SQLAlchemy
+- CRUD operations with SQLite
+- Input validation and error handling
+- Jinja2 templating
+- Data visualisation with Chart.js
+- File export with openpyxl
+- Flash messaging and Flask sessions
+- Structuring a Python web project
+
+---
+
+## 📸 Screenshots
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Expenses Table
+![Expenses](screenshots/Expenses_Table.png)
+
+### Add Expense
+![Add Expense](screenshots/Add_Expense1.png)
+
+### Flash Message
+![Flash_Message](screenshots/Add_Expense2.png)
