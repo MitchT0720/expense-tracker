@@ -33,7 +33,7 @@ Data is persisted using SQLite via Flask-SQLAlchemy.
 ```
 3. Install dependencies:
 ```bash
-    pip install flask flask-sqlalchemy openpyxl
+    pip install -r requirements.txt
 ```
 4. Run the app:
 ```bash
@@ -50,11 +50,10 @@ ExpenseTracker/
 ├── app.py
 ├── models.py
 ├── seed.py
+├── requirements.txt
 ├── templates/
 │   ├── index.html
 │   └── edit.html
-├── instance/
-│   └── expenses.db
 └── README.md
 ```
 
