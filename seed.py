@@ -1,5 +1,4 @@
 import datetime
-from app import app
 from models import db, Expense
 
 SEED_DATA = [
@@ -23,15 +22,11 @@ SEED_DATA = [
 ]
 
 def seed():
-    with app.app_context():
-        if Expense.query.first() is None:
-            for item in SEED_DATA:
-                expense = Expense(**item)
-                db.session.add(expense)
-            db.session.commit()
-            print(f"Seeded {len(SEED_DATA)} expenses.")
-        else:
-            print("Database already has data, skipping seed.")
-
-if __name__ == "__main__":
-    seed()
+    if Expense.query.first() is None:
+        for item in SEED_DATA:
+            expense = Expense(**item)
+            db.session.add(expense)
+        db.session.commit()
+        print(f"Seeded {len(SEED_DATA)} expenses.")
+    else:
+        print("Database already has data, skipping seed.")
