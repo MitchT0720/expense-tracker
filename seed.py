@@ -2,36 +2,37 @@ import datetime
 from models import db, Expense
 
 SEED_DATA = [
-    Expense(title="Groceries", amount=45.50, category="Food", date=datetime.date(2026, 4, 3)),
-    Expense(title="Bus pass", amount=30.00, category="Transport", date=datetime.date(2026, 4, 7)),
-    Expense(title="Netflix", amount=10.99, category="Entertainment", date=datetime.date(2026, 4, 10)),
-    Expense(title="Electricity bill", amount=85.00, category="Bills", date=datetime.date(2026, 4, 15)),
-    Expense(title="Lunch", amount=12.50, category="Food", date=datetime.date(2026, 4, 18)),
-    Expense(title="Train ticket", amount=22.00, category="Transport", date=datetime.date(2026, 4, 22)),
-    Expense(title="New shoes", amount=65.00, category="Shopping", date=datetime.date(2026, 4, 28)),
-    Expense(title="Coffee", amount=3.50, category="Food", date=datetime.date(2026, 5, 2)),
-    Expense(title="Spotify", amount=9.99, category="Entertainment", date=datetime.date(2026, 5, 5)),
-    Expense(title="Internet bill", amount=35.00, category="Bills", date=datetime.date(2026, 5, 8)),
-    Expense(title="Dinner out", amount=48.00, category="Food", date=datetime.date(2026, 5, 14)),
-    Expense(title="Uber", amount=15.50, category="Transport", date=datetime.date(2026, 5, 19)),
-    Expense(title="Amazon order", amount=29.99, category="Shopping", date=datetime.date(2026, 5, 23)),
-    Expense(title="Cinema", amount=14.00, category="Entertainment", date=datetime.date(2026, 5, 28)),
-    Expense(title="Supermarket", amount=67.30, category="Food", date=datetime.date(2026, 6, 1)),
-    Expense(title="Gas bill", amount=55.00, category="Bills", date=datetime.date(2026, 6, 3)),
-    Expense(title="Gym wear", amount=40.00, category="Shopping", date=datetime.date(2026, 6, 5)),
+    ("Monthly rail pass", 89.00, "Transport", datetime.date(2026, 4, 1)),
+    ("Electricity bill", 72.40, "Bills", datetime.date(2026, 4, 3)),
+    ("Tesco grocery run", 38.20, "Food", datetime.date(2026, 4, 7)),
+    ("Amazon purchase", 24.99, "Shopping", datetime.date(2026, 4, 12)),
+    ("Cinema tickets", 18.00, "Entertainment", datetime.date(2026, 4, 15)),
+    ("Coffee and pastry", 6.50, "Food", datetime.date(2026, 4, 20)),
+    ("Bus fare", 3.20, "Transport", datetime.date(2026, 4, 25)),
+    ("Monthly rail pass", 89.00, "Transport", datetime.date(2026, 5, 1)),
+    ("Internet bill", 35.00, "Bills", datetime.date(2026, 5, 2)),
+    ("Tesco grocery run", 45.60, "Food", datetime.date(2026, 5, 8)),
+    ("ASOS order", 52.00, "Shopping", datetime.date(2026, 5, 11)),
+    ("Uber to airport", 24.00, "Transport", datetime.date(2026, 5, 14)),
+    ("Netflix subscription", 10.99, "Entertainment", datetime.date(2026, 5, 18)),
+    ("Lunch at Pret", 9.25, "Food", datetime.date(2026, 5, 22)),
+    ("Gas bill", 58.00, "Bills", datetime.date(2026, 5, 28)),
+    ("Tesco grocery run", 42.50, "Food", datetime.date(2026, 6, 1)),
+    ("Monthly rail pass", 89.00, "Transport", datetime.date(2026, 6, 1)),
+    ("Electricity bill", 67.30, "Bills", datetime.date(2026, 6, 3)),
+    ("ASOS order", 35.00, "Shopping", datetime.date(2026, 6, 4)),
+    ("Lunch at Pret", 8.75, "Food", datetime.date(2026, 6, 5)),
+    ("Amazon purchase", 19.99, "Shopping", datetime.date(2026, 6, 7)),
+    ("Cinema tickets", 22.00, "Entertainment", datetime.date(2026, 6, 9)),
+    ("Coffee and pastry", 6.50, "Food", datetime.date(2026, 6, 10)),
+    ("Bus fare", 3.20, "Transport", datetime.date(2026, 6, 11)),
 ]
 
 def seed():
-    count = db.session.query(Expense).count()
-    if count == 0:
-        for item in SEED_DATA:
-            expense = Expense(
-                title=item["title"],
-                amount=item["amount"],
-                category=item["category"],
-                date=item["date"]
-            )
-            db.session.add(expense)
+    count = db.session.execute(db.select(Expense)).scalars().all()
+    if len(count) == 0:
+        for title, amount, category, date in SEED_DATA:
+            db.session.add(Expense(title=title, amount=amount, category=category, date=date))
         db.session.commit()
         print(f"Seeded {len(SEED_DATA)} expenses.")
     else:
