@@ -1,5 +1,13 @@
 # Expense Tracker (Python / Flask Web App)
 
+## 🌐 Live API
+
+**Base URL**: https://expense-tracker-8ujs.onrender.com/
+
+> **Note:** The free instance may take 30-60 seconds to wake up on the first request.
+
+---
+
 ## 📌 Description
 
 A web-based expense tracker built with Python and Flask, evolved from an initial CLI version.
