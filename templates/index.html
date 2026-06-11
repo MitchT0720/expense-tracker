@@ -125,10 +125,12 @@
         <div class="card p-3">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h4>Expenses</h4>
-                <a href="/export" class="btn btn-success btn-sm">Export to Excel</a>
-                <a href="/reset" class="btn btn-secondary btn-sm" onclick="return confirm('Reset all data to defaults?')">Reset Demo Data</a>
+                <div class="d-flex gap-2">
+                    <a href="/export" class="btn btn-success btn-sm">Export to Excel</a>
+                    <a href="/reset" class="btn btn-secondary btn-sm" onclick="return confirm('Reset all data to defaults?')">Reset Demo Data</a>
+                </div>
             </div>
-
+            
             <table class="table table-hover mt-2">
                 <thead>
                     <tr>
