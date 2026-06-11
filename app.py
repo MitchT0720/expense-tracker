@@ -137,6 +137,15 @@ def export():
         download_name="expenses.xlsx"
     )
 
+@app.route("/reset")
+def reset():
+    db.session.query(Expense).delete()
+    db.session.commit()
+    from seed import seed
+    seed()
+    flash("Database reset to default data", "success")
+    return redirect(url_for("index"))
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=False)
