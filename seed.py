@@ -22,9 +22,15 @@ SEED_DATA = [
 ]
 
 def seed():
-    if Expense.query.first() is None:
+    count = db.session.query(Expense).count()
+    if count == 0:
         for item in SEED_DATA:
-            expense = Expense(**item)
+            expense = Expense(
+                title=item["title"],
+                amount=item["amount"],
+                category=item["category"],
+                date=item["date"]
+            )
             db.session.add(expense)
         db.session.commit()
         print(f"Seeded {len(SEED_DATA)} expenses.")
