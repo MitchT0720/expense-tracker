@@ -9,12 +9,14 @@ import os
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///expenses.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SECRET_KEY"] = "your-secret-key" # for Flask session and flash messages
+app.config["SECRET_KEY"] = "your-secret-key"
 
 db.init_app(app)
 
 with app.app_context():
     db.create_all()
+    from seed import seed
+    seed()
 
 @app.route("/")
 def index():

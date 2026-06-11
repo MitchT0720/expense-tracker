@@ -2,7 +2,7 @@ import datetime
 from app import app
 from models import db, Expense
 
-expenses = [
+SEED_DATA = [
     Expense(title="Groceries", amount=45.50, category="Food", date=datetime.date(2026, 4, 3)),
     Expense(title="Bus pass", amount=30.00, category="Transport", date=datetime.date(2026, 4, 7)),
     Expense(title="Netflix", amount=10.99, category="Entertainment", date=datetime.date(2026, 4, 10)),
@@ -22,9 +22,16 @@ expenses = [
     Expense(title="Gym wear", amount=40.00, category="Shopping", date=datetime.date(2026, 6, 5)),
 ]
 
-with app.app_context():
-    db.drop_all()
-    db.create_all()
-    db.session.add_all(expenses)
-    db.session.commit()
-    print("Done! Database seeded.")
+def seed():
+    with app.app_context():
+        if Expense.query.first() is None:
+            for item in SEED_DATA:
+                expense = Expense(**item)
+                db.session.add(expense)
+            db.session.commit()
+            print(f"Seeded {len(SEED_DATA)} expenses.")
+        else:
+            print("Database already has data, skipping seed.")
+
+if __name__ == "__main__":
+    seed()
